@@ -1,34 +1,34 @@
-[gd_scene load_steps=22 format=3 uid="uid://bmn753py6bcy3"]
+[gd_scene load_steps=22 format=3 uid="uid://chr0jaima7mv5"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_x6i5f"]
-[ext_resource type="Texture2D" uid="uid://dsfilftwejwni" path="res://bolt-Sheet.png" id="2_3518k"]
-[ext_resource type="Script" path="res://states.gd" id="3_f66aj"]
-[ext_resource type="Script" path="res://idle.gd" id="4_4pdaj"]
-[ext_resource type="Script" path="res://move.gd" id="5_gvapo"]
-[ext_resource type="Script" path="res://jump.gd" id="5_vgwo7"]
-[ext_resource type="Script" path="res://fall.gd" id="7_0ux57"]
-[ext_resource type="Script" path="res://slide.gd" id="8_0apbk"]
-[ext_resource type="Script" path="res://wallkick.gd" id="9_ygkra"]
-[ext_resource type="Script" path="res://wallslide.gd" id="10_d5gw2"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_sxh08"]
+[ext_resource type="Texture2D" uid="uid://dsfilftwejwni" path="res://bolt-Sheet.png" id="2_q2yfa"]
+[ext_resource type="Script" path="res://states.gd" id="3_ev4vi"]
+[ext_resource type="Script" path="res://idle.gd" id="4_4n3na"]
+[ext_resource type="Script" path="res://jump.gd" id="5_3nfqf"]
+[ext_resource type="Script" path="res://move.gd" id="6_ihk6d"]
+[ext_resource type="Script" path="res://fall.gd" id="7_v0qw0"]
+[ext_resource type="Script" path="res://slide.gd" id="8_1ntsq"]
+[ext_resource type="Script" path="res://wallkick.gd" id="9_dmfp5"]
+[ext_resource type="Script" path="res://wallslide.gd" id="10_ghpm7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrp2y"]
-atlas = ExtResource("2_3518k")
+atlas = ExtResource("2_q2yfa")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_loj3c"]
-atlas = ExtResource("2_3518k")
+atlas = ExtResource("2_q2yfa")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hhwh6"]
-atlas = ExtResource("2_3518k")
+atlas = ExtResource("2_q2yfa")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q62du"]
-atlas = ExtResource("2_3518k")
+atlas = ExtResource("2_q2yfa")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4x2ja"]
-atlas = ExtResource("2_3518k")
+atlas = ExtResource("2_q2yfa")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pfyye"]
@@ -203,13 +203,9 @@ _data = {
 
 [node name="Enemy2D" type="CharacterBody2D"]
 position = Vector2(0, -8)
-script = ExtResource("1_x6i5f")
+script = ExtResource("1_sxh08")
 
 [node name="EnemySPR" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_pfyye")
-animation = &"idle"
-
-[node name="EnemySPR" type="AnimatedSprite2D" parent="EnemySPR"]
 sprite_frames = SubResource("SpriteFrames_pfyye")
 animation = &"idle"
 
@@ -218,28 +214,28 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_7duem")
 
 [node name="States" type="Node" parent="."]
-script = ExtResource("3_f66aj")
+script = ExtResource("3_ev4vi")
 
 [node name="Idle" type="Node" parent="States"]
-script = ExtResource("4_4pdaj")
+script = ExtResource("4_4n3na")
 
 [node name="Jump" type="Node" parent="States"]
-script = ExtResource("5_vgwo7")
+script = ExtResource("5_3nfqf")
 
 [node name="Move" type="Node" parent="States"]
-script = ExtResource("5_gvapo")
+script = ExtResource("6_ihk6d")
 
 [node name="Fall" type="Node" parent="States"]
-script = ExtResource("7_0ux57")
+script = ExtResource("7_v0qw0")
 
 [node name="Slide" type="Node" parent="States"]
-script = ExtResource("8_0apbk")
+script = ExtResource("8_1ntsq")
 
 [node name="WallKick" type="Node" parent="States"]
-script = ExtResource("9_ygkra")
+script = ExtResource("9_dmfp5")
 
 [node name="WallSlide" type="Node" parent="States"]
-script = ExtResource("10_d5gw2")
+script = ExtResource("10_ghpm7")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
