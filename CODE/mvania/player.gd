@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# Jobbers
 const JUMP_VELOCITY = -320.0
 const BASE_GRAVITY = 1000.0
 const BASE_SPEED = 140.0
