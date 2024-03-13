@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-# Jobbers
 const BASE_GRAVITY = 1000.0
 const BASE_SPEED = 20.0
 const SLIDE_SPEED = BASE_SPEED * 1.5
