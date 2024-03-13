@@ -1,0 +1,15 @@
+Timer
+AnimatedSprite2D
+Sprite2D
+Node
+CharacterBody2D
+TileMap
+ParallaxBackground
+Camera2D
+RayCast2D
+Node2D
+AnimationPlayer
+CanvasLayer
+Label
+CollisionShape2D
+StaticBody2D
