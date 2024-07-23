@@ -6,7 +6,7 @@ const SLIDE_SPEED = 1.5 * BASE_SPEED
 const JUMP_VELOCITY = -320.0
 
 var speed = BASE_SPEED
-var health = 300
+var health : int
 var sliding = false
 var attacking = false
 var slideDirection = Vector2.RIGHT
@@ -22,21 +22,18 @@ var inputAttack = false
 var incapacitated = false
 var impactDirection = 1
 
-var spawnPoint = Vector2.ZERO
 var quadrant = Vector2.ZERO
 
 @onready var healthMeter = $player_health
 
 func _ready():
-	spawnPoint = global_position
+	event_bus.OnLoadzoneTriggered.connect( StoreContinuity )
+	event_bus.SpawnPlayer.connect( ApplyContinuity )
 	state_machine.Initiate( self )
 	state_machine_combat.Initiate( self )
 
 func _physics_process( delta ):
 	healthMeter.text = str( health )
-	if health <= 0:
-		global_position = spawnPoint
-		health = 3
 	
 	if !incapacitated:
 		PlayerInput()
@@ -44,10 +41,10 @@ func _physics_process( delta ):
 	GetWall()
 	
 	# DEBUG
-	$"../debug_hud/db_state".text = str( state_machine.current_state.name )
-	$"../debug_hud/db_state2".text = str( state_machine_combat.current_state.name )
-	$"../debug_hud/db_speed".text = "SPEED: " + str( speed ) + " (" + str( velocity ) + ")"
-	$"../debug_hud/db_quadrant".text = "QUADRANT: " + str( GetQuadrant() )
+	#$"../debug_hud/db_state".text = str( state_machine.current_state.name )
+	#$"../debug_hud/db_state2".text = str( state_machine_combat.current_state.name )
+	#$"../debug_hud/db_speed".text = "SPEED: " + str( speed ) + " (" + str( velocity ) + ")"
+	#$"../debug_hud/db_quadrant".text = "QUADRANT: " + str( GetQuadrant() )
 	
 	state_machine.Update( delta )
 	state_machine_combat.Update( delta )
@@ -107,6 +104,19 @@ func GetCeiling():
 func GetQuadrant():
 	quadrant = floor( global_position / 480 )
 	return quadrant
+
+func StoreContinuity():
+	player_state.health = health
+	player_state.velocity = velocity
+	player_state.speed = speed
+	player_state.state = state_machine.current_state
+
+func ApplyContinuity( spawn_point : Vector2 ):
+	health = player_state.health
+	velocity = player_state.velocity
+	speed = player_state.speed
+	state_machine.starting_state = player_state.state
+	global_position = spawn_point
 
 func _on_player_hurtbox_area_entered( area ):
 	health -= 1

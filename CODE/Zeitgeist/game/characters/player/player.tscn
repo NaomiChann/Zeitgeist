@@ -1,8 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://bmn753py6bcy3"]
+[gd_scene load_steps=33 format=3 uid="uid://bmn753py6bcy3"]
 
 [ext_resource type="Script" path="res://game/characters/player/scripts/player.gd" id="1_sw7an"]
-[ext_resource type="Texture2D" uid="uid://dsfilftwejwni" path="res://misc/debug/bolt-Sheet.png" id="2_812nr"]
-[ext_resource type="PackedScene" uid="uid://680l0m4bjtp2" path="res://game/scripts_general/classes/state_machine.tscn" id="3_56wo1"]
+[ext_resource type="Texture2D" uid="uid://dsfilftwejwni" path="res://misc/debug/assets/bolt-Sheet.png" id="2_812nr"]
+[ext_resource type="PackedScene" uid="uid://680l0m4bjtp2" path="res://game/scripts_general/classes/state_machine/state_machine.tscn" id="3_56wo1"]
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/movement/idle.gd" id="4_kuihm"]
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/movement/move.gd" id="5_cv6ms"]
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/movement/jump.gd" id="6_2dknb"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/movement/wallkick.gd" id="11_l6c38"]
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/combat/attack.gd" id="12_0dlcb"]
 [ext_resource type="Script" path="res://game/characters/player/scripts/state_machine/combat/rest.gd" id="13_ghlp4"]
+[ext_resource type="PackedScene" uid="uid://ewi07af5kjmn" path="res://misc/debug/assets/scenes/bullet_obj.tscn" id="14_54g5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrp2y"]
 atlas = ExtResource("2_812nr")
@@ -1083,6 +1084,7 @@ size = Vector2(32, 10)
 [node name="player_obj" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "state_machine_combat", "raycasts", "animation", "hurtbox")]
 z_index = 2
 position = Vector2(0, -8)
+collision_mask = 4
 script = ExtResource("1_sw7an")
 state_machine = NodePath("sm_movement")
 state_machine_combat = NodePath("sm_combat")
@@ -1228,6 +1230,9 @@ one_shot = true
 
 [node name="stun_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="bullet_obj" parent="." instance=ExtResource("14_54g5j")]
+visible = false
 
 [connection signal="area_entered" from="player_hurtbox" to="." method="_on_player_hurtbox_area_entered"]
 [connection signal="timeout" from="slide_timer" to="sm_movement/st_slide" method="_on_timer_timeout"]
