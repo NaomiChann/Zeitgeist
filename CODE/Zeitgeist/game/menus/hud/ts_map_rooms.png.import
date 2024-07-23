@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsfilftwejwni"
-path="res://.godot/imported/bolt-Sheet.png-fe2f8d9c4a328b8444003d57586e3e4a.ctex"
+uid="uid://cmidruc4qlppt"
+path="res://.godot/imported/ts_map_rooms.png-03c64a31572182041998934059287a63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://misc/debug/bolt-Sheet.png"
-dest_files=["res://.godot/imported/bolt-Sheet.png-fe2f8d9c4a328b8444003d57586e3e4a.ctex"]
+source_file="res://game/menus/hud/ts_map_rooms.png"
+dest_files=["res://.godot/imported/ts_map_rooms.png-03c64a31572182041998934059287a63.ctex"]
 
 [params]
 

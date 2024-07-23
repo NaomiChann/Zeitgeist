@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=3 uid="uid://ccbglawb4f01a"]
+
+[ext_resource type="Texture2D" uid="uid://c1sst454o2min" path="res://misc/debug/assets/dbg.png" id="1_eeqan"]
+[ext_resource type="PackedScene" uid="uid://clbk65vjbkwj4" path="res://misc/debug/assets/scenes/ground.tscn" id="2_a2gv6"]
+[ext_resource type="PackedScene" uid="uid://bmn753py6bcy3" path="res://game/characters/player/player.tscn" id="3_n0oe5"]
+[ext_resource type="PackedScene" uid="uid://b3kiouatt8ufh" path="res://game/characters/enemies/enemy.tscn" id="4_ucs1l"]
+[ext_resource type="PackedScene" uid="uid://mn13vws1dqva" path="res://game/scripts_general/classes/loading_zone/loading_zone.tscn" id="5_um1x5"]
+[ext_resource type="PackedScene" uid="uid://b0dhswhg0jsg2" path="res://game/menus/hud/hud.tscn" id="6_8d33y"]
+
+[sub_resource type="Animation" id="Animation_y82nd"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_ei8qj"]
+resource_name = "fade"
+
+[sub_resource type="Animation" id="Animation_vto6x"]
+resource_name = "fade_2"
+
+[sub_resource type="Animation" id="Animation_6a6d3"]
+resource_name = "slide"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1oo4"]
+_data = {
+"RESET": SubResource("Animation_y82nd"),
+"fade": SubResource("Animation_ei8qj"),
+"fade_2": SubResource("Animation_vto6x"),
+"slide": SubResource("Animation_6a6d3")
+}
+
+[node name="room_1" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Dbg" type="Sprite2D" parent="Node2D"]
+position = Vector2(360, 120)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg2" type="Sprite2D" parent="Node2D"]
+position = Vector2(360, 360)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg3" type="Sprite2D" parent="Node2D"]
+position = Vector2(120, 120)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg4" type="Sprite2D" parent="Node2D"]
+position = Vector2(120, 360)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Ground" parent="Node2D" instance=ExtResource("2_a2gv6")]
+position = Vector2(184, 544)
+
+[node name="Ground2" parent="Node2D" instance=ExtResource("2_a2gv6")]
+position = Vector2(-64, 40)
+rotation = 1.5708
+
+[node name="Ground3" parent="Node2D" instance=ExtResource("2_a2gv6")]
+position = Vector2(320, -64)
+
+[node name="Ground4" parent="Node2D" instance=ExtResource("2_a2gv6")]
+position = Vector2(1024, 40)
+rotation = 1.5708
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(480, 0)
+
+[node name="Dbg" type="Sprite2D" parent="Node2D2"]
+position = Vector2(360, 120)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg2" type="Sprite2D" parent="Node2D2"]
+position = Vector2(360, 360)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg3" type="Sprite2D" parent="Node2D2"]
+position = Vector2(120, 120)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Dbg4" type="Sprite2D" parent="Node2D2"]
+position = Vector2(120, 360)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_eeqan")
+
+[node name="Ground" parent="Node2D2" instance=ExtResource("2_a2gv6")]
+position = Vector2(488, 544)
+
+[node name="Ground2" parent="Node2D2" instance=ExtResource("2_a2gv6")]
+position = Vector2(-288, 632)
+rotation = 1.5708
+
+[node name="Ground3" parent="Node2D2" instance=ExtResource("2_a2gv6")]
+position = Vector2(40, -64)
+
+[node name="Ground4" parent="Node2D2" instance=ExtResource("2_a2gv6")]
+position = Vector2(296, 96)
+rotation = 1.5708
+
+[node name="player_obj" parent="." instance=ExtResource("3_n0oe5")]
+position = Vector2(976, 416)
+
+[node name="camera_obj" type="Camera2D" parent="player_obj"]
+visible = false
+limit_left = -60
+limit_top = -60
+limit_right = 1020
+limit_bottom = 540
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w1oo4")
+}
+
+[node name="enemy_obj" parent="." instance=ExtResource("4_ucs1l")]
+position = Vector2(432, 408)
+
+[node name="loading_zone" parent="." instance=ExtResource("5_um1x5")]
+position = Vector2(1056, 416)
+scale = Vector2(1, 4.36)
+target_id = 1
+target_room = "res://misc/debug/room_1.tscn"
+
+[node name="loading_zone3" parent="." instance=ExtResource("5_um1x5")]
+position = Vector2(576, 584)
+rotation = 1.57079
+scale = Vector2(1, 4.36)
+zone_id = 2
+transition_direcion = 1
+target_room = "res://misc/debug/world.tscn"
+
+[node name="loading_zone4" parent="." instance=ExtResource("5_um1x5")]
+position = Vector2(904, -128)
+rotation = 1.57079
+scale = Vector2(1, 4.36)
+zone_id = 3
+transition_direcion = 1
+target_id = 2
+target_room = "res://misc/debug/room_1.tscn"
+
+[node name="loading_zone2" parent="." instance=ExtResource("5_um1x5")]
+position = Vector2(-96, 416)
+scale = Vector2(1, 4.36)
+zone_id = 1
+target_room = "res://misc/debug/room_1.tscn"
+
+[node name="hud_obj" parent="." instance=ExtResource("6_8d33y")]

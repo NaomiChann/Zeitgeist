@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://mn13vws1dqva"]
+
+[ext_resource type="Script" path="res://game/scripts_general/classes/loading_zone/loading_zone.gd" id="1_ssoav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mimt7"]
+size = Vector2(32, 32)
+
+[node name="loading_zone" type="Area2D" groups=["LoadingZone"]]
+collision_layer = 0
+script = ExtResource("1_ssoav")
+
+[node name="loading_zone_col" type="CollisionShape2D" parent="."]
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_mimt7")
+
+[connection signal="body_entered" from="." to="." method="GetCollisionPoint"]

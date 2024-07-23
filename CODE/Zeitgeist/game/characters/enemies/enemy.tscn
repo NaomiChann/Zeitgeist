@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://b3kiouatt8ufh"]
 
-[ext_resource type="Texture2D" uid="uid://cdhi1dl7jo868" path="res://misc/debug/icon.svg" id="1_6ydxd"]
+[ext_resource type="Texture2D" uid="uid://cdhi1dl7jo868" path="res://misc/debug/assets/icon.svg" id="1_6ydxd"]
 [ext_resource type="Script" path="res://game/scripts_general/enemies/enemy.gd" id="1_m2qli"]
-[ext_resource type="PackedScene" uid="uid://680l0m4bjtp2" path="res://game/scripts_general/classes/state_machine.tscn" id="3_0dh65"]
+[ext_resource type="PackedScene" uid="uid://680l0m4bjtp2" path="res://game/scripts_general/classes/state_machine/state_machine.tscn" id="3_0dh65"]
 [ext_resource type="Script" path="res://game/scripts_general/enemies/state_machine/idle_ene.gd" id="4_h432h"]
 [ext_resource type="Script" path="res://game/scripts_general/enemies/state_machine/move_ene.gd" id="5_5xa63"]
 
