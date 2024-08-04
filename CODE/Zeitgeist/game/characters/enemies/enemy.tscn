@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://b3kiouatt8ufh"]
 
-[ext_resource type="Texture2D" uid="uid://cdhi1dl7jo868" path="res://misc/debug/assets/icon.svg" id="1_6ydxd"]
-[ext_resource type="Script" path="res://game/scripts_general/enemies/enemy.gd" id="1_m2qli"]
-[ext_resource type="PackedScene" uid="uid://680l0m4bjtp2" path="res://game/scripts_general/classes/state_machine/state_machine.tscn" id="3_0dh65"]
-[ext_resource type="Script" path="res://game/scripts_general/enemies/state_machine/idle_ene.gd" id="4_h432h"]
-[ext_resource type="Script" path="res://game/scripts_general/enemies/state_machine/move_ene.gd" id="5_5xa63"]
+[ext_resource type="Texture2D" uid="uid://cdhi1dl7jo868" path="res://debug/assets/icon.svg" id="1_6ydxd"]
+[ext_resource type="Script" path="res://game/characters/enemies/enemy.gd" id="1_m2qli"]
+[ext_resource type="Script" path="res://game/scripts_general/classes/state_machine/state_machine.gd" id="3_1brjx"]
+[ext_resource type="Script" path="res://game/characters/enemies/states/idle.gd" id="4_h432h"]
+[ext_resource type="Script" path="res://game/characters/enemies/states/move.gd" id="5_5xa63"]
 
 [sub_resource type="Animation" id="Animation_gq4ep"]
 length = 0.001
@@ -202,10 +202,10 @@ _data = {
 "right_move": SubResource("Animation_ueoy8")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uedoa"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lv0ld"]
 size = Vector2(32, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lv0ld"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uedoa"]
 size = Vector2(32, 64)
 
 [node name="enemy_obj" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "raycasts", "raycasts_ground", "animation", "hurtbox")]
@@ -229,6 +229,9 @@ libraries = {
 "": SubResource("AnimationLibrary_asqbh")
 }
 
+[node name="enemy_col" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lv0ld")
+
 [node name="enemy_hurtbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
@@ -236,36 +239,6 @@ collision_mask = 3
 [node name="enemy_hurtbox_col" type="CollisionShape2D" parent="enemy_hurtbox"]
 shape = SubResource("RectangleShape2D_uedoa")
 debug_color = Color(0.729412, 0.152941, 0, 0.231373)
-
-[node name="health" type="Label" parent="."]
-offset_left = -20.0
-offset_top = 32.0
-offset_right = 20.0
-offset_bottom = 55.0
-text = "3"
-horizontal_alignment = 1
-
-[node name="db_state" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -56.0
-offset_right = 20.0
-offset_bottom = -33.0
-text = "3"
-horizontal_alignment = 1
-
-[node name="sm_behavior" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("3_0dh65")]
-starting_state = NodePath("st_idle")
-
-[node name="st_idle" type="Node" parent="sm_behavior" node_paths=PackedStringArray("state_move")]
-script = ExtResource("4_h432h")
-state_move = NodePath("../st_move")
-
-[node name="st_move" type="Node" parent="sm_behavior" node_paths=PackedStringArray("state_idle")]
-script = ExtResource("5_5xa63")
-state_idle = NodePath("../st_idle")
-
-[node name="idle_timer" type="Timer" parent="."]
-one_shot = true
 
 [node name="proximity_detector" type="Node2D" parent="."]
 
@@ -279,13 +252,25 @@ position = Vector2(-16, 28)
 target_position = Vector2(-20, 0)
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lv0ld")
-
 [node name="ledge_detector" type="RayCast2D" parent="."]
 position = Vector2(-16, 32)
 target_position = Vector2(0, 8)
 collision_mask = 4
+
+[node name="sm_behavior" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_1brjx")
+starting_state = NodePath("st_idle")
+
+[node name="st_idle" type="Node" parent="sm_behavior" node_paths=PackedStringArray("state_move")]
+script = ExtResource("4_h432h")
+state_move = NodePath("../st_move")
+
+[node name="st_move" type="Node" parent="sm_behavior" node_paths=PackedStringArray("state_idle")]
+script = ExtResource("5_5xa63")
+state_idle = NodePath("../st_idle")
+
+[node name="idle_timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="enemy_hurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
 [connection signal="timeout" from="idle_timer" to="sm_behavior/st_idle" method="_on_idle_timer_timeout"]
