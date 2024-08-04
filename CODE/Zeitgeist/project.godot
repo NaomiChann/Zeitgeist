@@ -11,17 +11,24 @@ config_version=5
 [application]
 
 config/name="Zeitgeist"
-config/version="0.0.5"
-run/main_scene="res://misc/debug/world.tscn"
+config/version="0.0.9"
+run/main_scene="res://debug/rooms/room_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://misc/debug/icon.svg"
+config/icon="res://debug/assets/icon.svg"
+
+[autoload]
+
+scene_manager="*res://game/scripts_general/autoload/scene_manager.gd"
+player_state="*res://game/scripts_general/autoload/player_state.gd"
+event_bus="*res://game/scripts_general/autoload/event_bus.gd"
 
 [display]
 
 window/size/viewport_width=240
 window/size/viewport_height=160
-window/size/mode=2
+window/size/always_on_top=true
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 
@@ -43,7 +50,7 @@ attack={
 
 [layer_names]
 
-2d_physics/layer_1="Ground"
+2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Wall"
 
@@ -52,3 +59,4 @@ attack={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_vertices_to_pixel=true

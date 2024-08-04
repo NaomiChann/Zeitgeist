@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://7k6d24mawvpp"]
+
+[ext_resource type="Texture2D" uid="uid://c4wm6nqjcgwia" path="res://game/characters/enemies/bosses/hotf/sprites/drill.png" id="2_iwsqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apn71"]
+size = Vector2(42, 20)
+
+[node name="arm_drill" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_iwsqk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_apn71")
