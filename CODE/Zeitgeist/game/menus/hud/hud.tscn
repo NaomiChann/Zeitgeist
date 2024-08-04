@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0dhswhg0jsg2"]
+[gd_scene load_steps=15 format=3 uid="uid://b0dhswhg0jsg2"]
 
 [ext_resource type="Shader" path="res://game/scripts_general/shaders/gamma_fade.gdshader" id="1_3phn0"]
 [ext_resource type="Shader" path="res://game/scripts_general/shaders/simple_outline.gdshader" id="1_kionx"]
-[ext_resource type="Script" path="res://misc/debug/scripts/fadetest.gd" id="2_uamcg"]
+[ext_resource type="Texture2D" uid="uid://ch6lvlhh3fmcr" path="res://game/scripts_general/classes/class_icons/plr.svg" id="2_thkvj"]
+[ext_resource type="Script" path="res://game/menus/hud/location_tracker.gd" id="3_x4gki"]
+[ext_resource type="Script" path="res://game/menus/hud/transition.gd" id="4_cebjm"]
 [ext_resource type="Texture2D" uid="uid://cmidruc4qlppt" path="res://game/menus/hud/ts_map_rooms.png" id="4_h353r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se6px"]
@@ -11,7 +13,7 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 1.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
-shader_parameter/add_margins = true
+shader_parameter/add_margins = false
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3ccit"]
 viewport_path = NodePath("vp_map")
@@ -446,6 +448,44 @@ custom_data_layer_0/name = "is_door_tile"
 custom_data_layer_0/type = 1
 sources/2 = SubResource("TileSetAtlasSource_nt5u1")
 
+[sub_resource type="Animation" id="Animation_3jnha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("post_processing/gamma_fade:material:shader_parameter/gamma")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_r8s5x"]
+resource_name = "fade"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("post_processing/gamma_fade:material:shader_parameter/gamma")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk88l"]
+_data = {
+"RESET": SubResource("Animation_3jnha"),
+"fade": SubResource("Animation_r8s5x")
+}
+
 [node name="hud_obj" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -464,36 +504,44 @@ offset_bottom = 135.0
 text = "aaaaa"
 metadata/_edit_use_anchors_ = true
 
-[node name="rendered_map" type="Sprite2D" parent="debug_hud"]
+[node name="Node2D" type="Node2D" parent="debug_hud"]
+position = Vector2(188, 11)
+
+[node name="rendered_map" type="Sprite2D" parent="debug_hud/Node2D"]
 material = SubResource("ShaderMaterial_se6px")
-position = Vector2(224, 24)
+position = Vector2(-4, -4)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_3ccit")
+centered = false
+
+[node name="location_tracker" type="Sprite2D" parent="debug_hud/Node2D"]
+scale = Vector2(0.1875, 0.1875)
+texture = ExtResource("2_thkvj")
+centered = false
+script = ExtResource("3_x4gki")
 
 [node name="post_processing" type="CanvasLayer" parent="."]
 
 [node name="gamma_fade" type="ColorRect" parent="post_processing"]
-visible = false
 material = SubResource("ShaderMaterial_wasds")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_uamcg")
 
 [node name="vp_map" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(240, 160)
+size = Vector2i(96, 64)
 
 [node name="tm_test" type="TileMap" parent="vp_map"]
 tile_set = SubResource("TileSet_u2g2y")
 format = 2
 layer_0/name = "Room"
-layer_0/tile_data = PackedInt32Array(524300, 65538, 0, 524301, 196610, 0, 524299, 196610, 0, 524298, 65538, 0, 524302, 65538, 0, 524303, 196610, 0)
+layer_0/tile_data = PackedInt32Array(65538, 131074, 0, 65539, 131074, 0, 65541, 131074, 0, 65540, 131074, 0, 65542, 131074, 0, 65543, 131074, 0, 65544, 131074, 0, 65545, 131074, 0, 65546, 262146, 4, 393226, 262146, 8, 327690, 2, 2, 262154, 2, 2, 196618, 2, 2, 393224, 131074, 0, 393223, 131074, 0, 393218, 131074, 0, 393217, 2, 8, 327681, 2, 2, 262145, 2, 2, 196609, 2, 2, 131073, 2, 2, 196613, 65538, 0, 196614, 196610, 0, 393219, 131074, 0, 393222, 131074, 0, 393221, 131074, 0, 393220, 131074, 0, 196612, 2, 0, 196615, 2, 0, 131078, 2, 0, 262150, 196610, 0, 262149, 65538, 0, 65537, 2, 4, 131082, 2, 2, 393225, 131074, 0, 262160, 196610, 0, 262159, 2, 4, 327695, 2, 2, 393231, 2, 8, 393232, 131074, 0, 393233, 262146, 8, 327697, 2, 1, 327696, 2, 0, 458766, 262146, 8, 458765, 65538, 0, 393230, 2, 1)
 layer_1/name = "Door"
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(524299, 327682, 0, 524300, 458754, 0, 524302, 458754, 0, 524301, 327682, 0)
+layer_1/tile_data = PackedInt32Array(131078, 262146, 1, 196614, 393218, 2, 196612, 327682, 0, 196613, 393218, 0, 196615, 458754, 0, 262150, 262146, 3, 393231, 458754, 0, 393230, 327682, 0, 327696, 327682, 3, 262160, 262146, 1, 327697, 458754, 0)
 
 [node name="tm_city_l1" type="TileMap" parent="vp_map"]
 visible = false
@@ -554,3 +602,9 @@ layer_0/tile_data = PackedInt32Array(720914, 131074, 0, 720913, 131074, 0, 72091
 layer_1/name = "Door"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(720919, 458754, 0, 720918, 393218, 0, 720917, 393218, 0, 720915, 327682, 0, 720916, 393218, 0, 393232, 458754, 0, 393231, 327682, 0, 589836, 262146, 3, 524300, 327682, 1, 655374, 327682, 0, 655375, 458754, 1, 720911, 327682, 3, 720912, 458754, 0, 524301, 458754, 3, 458765, 262146, 1)
+
+[node name="transition_anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jk88l")
+}
+script = ExtResource("4_cebjm")

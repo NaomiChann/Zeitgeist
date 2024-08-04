@@ -10,11 +10,10 @@ static func GetDirection( direction ):
 		return "idle"
 
 static func GetChildrenByClass( node : Node, name_of_class : String ):
-	var children_of_class : Array
+	var children_of_class : Array = []
 	
 	for child in node.get_children():
 		if child.is_class( name_of_class ):
-			child.is
 			children_of_class.push_back( child )
 	
 	return children_of_class

@@ -12,7 +12,7 @@ func Initiate( entity : Entity ):
 	
 	ChangeState( starting_state )
 
-func ChangeState( new_state ):
+func ChangeState( new_state : State ):
 	if current_state:
 		current_state.ExitState()
 	
