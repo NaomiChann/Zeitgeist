@@ -6,6 +6,8 @@ extends State
 
 func EnterState():
 	entity.speed = entity.BASE_SPEED
+	entity.animation.play( "wallslide" )
+	entity.SetTrail( false )
 
 func Update( _delta ):
 	entity.velocity.y = 50

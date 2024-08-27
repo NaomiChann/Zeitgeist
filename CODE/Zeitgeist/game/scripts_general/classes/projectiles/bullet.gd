@@ -1,15 +1,24 @@
 class_name Bullet
 extends Area2D
 
-@export var speed : int = 20
+@export var speed : float = 40.0
 @export var firing_angle : float
 
 @onready var direction : Vector2
 @onready var radius : float
+var decrease = 0.0001
+
+var sig = [-1, 1]
 
 func _physics_process( delta ):
-	radius = Butterfly()
-	direction = Vector2( radius * cos( firing_angle ), radius * -sin( firing_angle ) )
+	speed *= 1.05
+	position += Vector2.LEFT * speed * delta
+
+func HOTFElectric( delta ):
+	radius = Lightning()
+	direction = Vector2( radius * cos( firing_angle ) + ( sig[randi() % 2] * randi() % 10 ), 
+						( radius * -sin( firing_angle ) + ( sig[randi() % 2] * randi() % 5 ) ) / 3 )
+	speed = clamp( speed - ( decrease * delta ), 10, 40 )
 	position += direction * speed * delta
 
 func Nothing():
@@ -17,6 +26,9 @@ func Nothing():
 
 func Butterfly():
 	return cos( firing_angle ) * 2 * -sin( firing_angle )
+
+func Lightning():
+	return sin( firing_angle ) + pow( sin( 5 * ( firing_angle / 2 ) ), 3 )
 
 func Angel():
 	#var first_arg_left = cos( 5 * ( PI - firing_angle ) )

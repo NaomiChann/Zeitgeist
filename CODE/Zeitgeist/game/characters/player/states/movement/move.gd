@@ -5,21 +5,18 @@ extends State
 @export var state_fall	: State
 @export var state_slide	: State
 @export var state_stun	: State
+@export var state_crouch	: State
 
 var side = ""
 
 func EnterState():
 	entity.speed = entity.BASE_SPEED
-#	entity.animation.play( "move" )
-	entity.animation.play( "idle_move" )
+	entity.animation.play( "move" )
+	entity.SetTrail( false )
 
 func Update( delta ):
 	entity.ApplyGravity( delta )
 	Move()
-	side = utils.GetDirection( entity.inputDirection.x )
-	
-	if entity.animation.current_animation != ( side + "_move" ):
-		entity.animation.play( side + "_move" )
 	
 	if entity.incapacitated:
 		return state_stun
@@ -36,4 +33,6 @@ func Update( delta ):
 	if entity.inputSlideStart:
 		return state_slide
 	
+	if entity.inputDirection.y == -1:
+		return state_crouch
 	return null

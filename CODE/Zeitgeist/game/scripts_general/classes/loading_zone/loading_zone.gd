@@ -11,7 +11,7 @@ enum { horizontal, vertical }
 @export var target_id : int
 @export_file var target_room : String
 
-@onready var spawn_margin : float = min( abs( scale.x ), abs( scale.y ) ) * 16 + 8
+@onready var spawn_margin : float = min( abs( scale.x ), abs( scale.y ) ) * 16
 
 var spawn_point : Vector2
 
@@ -22,14 +22,13 @@ func GetCollisionPoint( player : Node2D ):
 	var collision_point = player.global_position - global_position
 	
 	if transition_direction == horizontal:
+		spawn_margin += 9
 		spawn_margin *= sign( -collision_point.x )
 		spawn_point = Vector2( spawn_margin, collision_point.y )
 	else:
-		spawn_margin += 8
+		spawn_margin += 15
 		spawn_margin *= sign( -collision_point.y )
-		spawn_point = Vector2( collision_point.x, spawn_margin )
+		spawn_point = Vector2( collision_point.x, spawn_margin  )
 	
-	event_bus.OnLoadzoneTriggered.emit( "fade" )
-	
-	await event_bus.TransitionFinished
+	event_bus.OnLoadzoneTriggered.emit()
 	scene_manager.ChangeScene( target_room, target_id, spawn_point )

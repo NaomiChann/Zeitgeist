@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://p287od6ddmw1"]
+[gd_scene load_steps=7 format=3 uid="uid://p287od6ddmw1"]
 
-[ext_resource type="Script" path="res://game/scripts_general/segmented.gd" id="1_3r6gb"]
-[ext_resource type="Texture2D" uid="uid://cdhi1dl7jo868" path="res://debug/assets/icon.svg" id="2_32hi4"]
+[ext_resource type="Script" path="res://game/scripts_general/classes/segmented.gd" id="1_3r6gb"]
 
 [sub_resource type="Curve2D" id="Curve2D_b4ry7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 90, 35, 1.04324, -7.84351, -1.04324, 7.84351, 96, 50, 8.24693, 1.27528, -8.24693, -1.27528, 83, 66, 5.47478, 4.52398, 15.0347, -5.43219, 73, 60)
+"points": PackedVector2Array(0, 0, 0, 0, 90, 35, -1.86157, -19.5897, 1.86157, 19.5897, 112, 83, 12.801, -2.93989, -12.801, 2.93989, 92, 119, 6.11456, 10.3391, 15.0347, -5.43219, 61, 103)
 }
 point_count = 4
 
@@ -21,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5.47478, 4.52398)]
+"values": [Vector2(6.11456, 10.3391)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -33,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(73, 60)]
+"values": [Vector2(61, 103)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -45,7 +44,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8.24693, -1.27528)]
+"values": [Vector2(-12.801, 2.93989)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -57,7 +56,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8.24693, 1.27528)]
+"values": [Vector2(12.801, -2.93989)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -69,7 +68,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(83, 66)]
+"values": [Vector2(92, 119)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -81,7 +80,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-1.04324, 7.84351)]
+"values": [Vector2(1.86157, 19.5897)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -93,7 +92,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1.04324, -7.84351)]
+"values": [Vector2(-1.86157, -19.5897)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -105,7 +104,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(96, 50)]
+"values": [Vector2(112, 83)]
 }
 
 [sub_resource type="Animation" id="Animation_sue0c"]
@@ -322,28 +321,13 @@ _data = {
 [node name="segmented" type="Node2D"]
 script = ExtResource("1_3r6gb")
 
-[node name="tail" type="Sprite2D" parent="."]
-position = Vector2(115, 28)
-scale = Vector2(0.078125, 0.078125)
-texture = ExtResource("2_32hi4")
-
-[node name="head" type="Sprite2D" parent="."]
-position = Vector2(165, 100)
-scale = Vector2(0.078125, 0.078125)
-texture = ExtResource("2_32hi4")
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(90, 35)
-scale = Vector2(0.109375, 0.0625)
-texture = ExtResource("2_32hi4")
-
 [node name="arm_curve" type="Path2D" parent="."]
 position = Vector2(-90, -35)
 curve = SubResource("Curve2D_b4ry7")
 
 [node name="arm_points" type="PathFollow2D" parent="arm_curve"]
 position = Vector2(90, 35)
-rotation = 1.19029
+rotation = 1.14103
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

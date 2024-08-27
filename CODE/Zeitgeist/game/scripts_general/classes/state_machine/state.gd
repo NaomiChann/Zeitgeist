@@ -16,4 +16,5 @@ func Update( _delta ):
 func Move():
 	entity.velocity.x = entity.speed * entity.inputDirection.x
 	if entity.inputDirection.x != 0:
+		entity.sprites.scale.x = entity.inputDirection.x
 		entity.lastDirection.x = entity.inputDirection.x
