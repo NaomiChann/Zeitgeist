@@ -15,10 +15,10 @@ func _ready():
 	
 	for segment in segments:
 		arm_arr.push_back( arm_seg_scene.instantiate() )
-		get_tree().root.add_child.call_deferred( arm_arr[segment] )
+		add_child.call_deferred( arm_arr[segment] )
 	
 	arm_drill = arm_drill_scene.instantiate()
-	get_tree().root.add_child.call_deferred( arm_drill )
+	add_child.call_deferred( arm_drill )
 	
 	$AnimationPlayer.play( "slam_cask" )
 	#$AnimationPlayer.play( "slam_ceiling" )

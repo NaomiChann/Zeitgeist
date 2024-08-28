@@ -9,14 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://b5f0ium1nepq7" path="res://game/objects/scripts/pickup.tscn" id="9_ikgwi"]
 [ext_resource type="PackedScene" uid="uid://d0hej52n2ivja" path="res://game/characters/enemies/city/gardner/gardner.tscn" id="10_2gf6y"]
 
-[node name="room" type="Node2D" node_paths=PackedStringArray("camera")]
+[node name="city_1" type="Node2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_pd2j0")
 room_coordinates = Vector2(1, 1)
 room_size = Vector2(2, 1)
 camera = NodePath("player_obj/camera_obj")
 
 [node name="player_obj" parent="." instance=ExtResource("2_jpdqa")]
-position = Vector2(44, 444)
+position = Vector2(888, 371)
 
 [node name="camera_obj" type="Camera2D" parent="player_obj"]
 limit_left = 0
@@ -42,6 +42,36 @@ target_room = "res://game/areas/city_2.tscn"
 position = Vector2(576, 448)
 pickup_type = 1
 pickup_value = 0
+
+[node name="pickup_obj4" parent="." instance=ExtResource("9_ikgwi")]
+position = Vector2(574, 309)
+pickup_type = 1
+pickup_value = 0
+id = 1
+
+[node name="pickup_obj5" parent="." instance=ExtResource("9_ikgwi")]
+position = Vector2(592, 309)
+pickup_type = 1
+pickup_value = 0
+id = 2
+
+[node name="pickup_obj6" parent="." instance=ExtResource("9_ikgwi")]
+position = Vector2(610, 309)
+pickup_type = 1
+pickup_value = 0
+id = 3
+
+[node name="pickup_obj7" parent="." instance=ExtResource("9_ikgwi")]
+position = Vector2(627, 309)
+pickup_type = 1
+pickup_value = 0
+id = 4
+
+[node name="pickup_obj8" parent="." instance=ExtResource("9_ikgwi")]
+position = Vector2(646, 309)
+pickup_type = 1
+pickup_value = 0
+id = 5
 
 [node name="gardner" parent="." instance=ExtResource("10_2gf6y")]
 position = Vector2(620, 280)

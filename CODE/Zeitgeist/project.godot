@@ -21,6 +21,7 @@ config/icon="res://debug/assets/icon.svg"
 scene_manager="*res://game/scripts_general/autoload/scene_manager.gd"
 player_state="*res://game/scripts_general/autoload/player_state.gd"
 event_bus="*res://game/scripts_general/autoload/event_bus.gd"
+world_state="*res://world_state.gd"
 
 [display]
 

@@ -29,6 +29,7 @@ func DeferredChangeScene( path : NodePath, target_id : int, spawn_point : Vector
 	get_tree().root.add_child( current_scene )
 	
 	var loading_zones : Array = get_tree().get_nodes_in_group( "LoadingZone" )
+	var pickups : Array = get_tree().get_nodes_in_group( "Pickup" )
 	var player : Player = current_scene.get_node( "player_obj" )
 	
 	# find zone with the targeted id
@@ -38,6 +39,13 @@ func DeferredChangeScene( path : NodePath, target_id : int, spawn_point : Vector
 			if zone.transition_direction == 1 and player_state.velocity.y < 0:
 				player_state.velocity.y = -320.0
 			break
+	
+	var i = 1
+	for pickup in pickups:
+		pickup.id = i
+		i += 1
+		if pickup.id in [1, 3, 5]:
+			pickup.queue_free()
 	
 	event_bus.SpawnPlayer.emit( spawn_point )
 	

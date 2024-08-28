@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b3kiouatt8ufh" path="res://game/characters/enemies/forest/cybush/cybush.tscn" id="8_xr2t3"]
 [ext_resource type="PackedScene" uid="uid://b5f0ium1nepq7" path="res://game/objects/scripts/pickup.tscn" id="10_x6g43"]
 
-[node name="room" type="Node2D" node_paths=PackedStringArray("camera")]
+[node name="city_2" type="Node2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_hhxno")
 room_coordinates = Vector2(3, 0)
 room_size = Vector2(2, 2)
@@ -67,3 +67,7 @@ position = Vector2(112, 320)
 
 [node name="enemy_cybush4" parent="." instance=ExtResource("8_xr2t3")]
 position = Vector2(152, 348)
+
+[node name="pickup_obj2" parent="." instance=ExtResource("10_x6g43")]
+position = Vector2(229, 762)
+id = 1

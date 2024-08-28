@@ -3,9 +3,12 @@ extends CharacterBody2D
 
 const GRAVITY = 1000.0
 
+@export_file( "*.json" ) var save_data : String
+
 @export var pickup_type : utils.Pickup
 @export var pickup_value : utils.Upgrade
 @export var sprite : AnimatedSprite2D
+@export var id : int = 0
 
 func _ready():
 	match pickup_type:
@@ -28,5 +31,8 @@ func _physics_process( delta ):
 
 func _on_pickup_hurtbox_area_entered( area ):
 	if area.name == "player_hurtbox":
+		print( get_parent().name )
 		event_bus.ItemPickup.emit( pickup_type, pickup_value )
+		if id != 0:
+			world_state.scene_states[get_parent().name].push_back( id )
 		queue_free()

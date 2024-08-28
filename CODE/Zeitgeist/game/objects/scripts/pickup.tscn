@@ -65,7 +65,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbxa0"]
 size = Vector2(16, 18)
 
-[node name="pickup_obj" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="pickup_obj" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["Pickup"]]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_wnry4")
