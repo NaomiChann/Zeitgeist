@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=4 uid="uid://c3tfdseyyj0oy"]
+
+[ext_resource type="Script" path="res://assets/scripts/classes/room/room.gd" id="1_g1ak0"]
+[ext_resource type="PackedScene" uid="uid://bmn753py6bcy3" path="res://assets/characters/player/player.tscn" id="2_5u4j1"]
+[ext_resource type="PackedScene" uid="uid://d2b43fyle65wx" path="res://assets/areas/tml_ground.tscn" id="3_sprg3"]
+[ext_resource type="PackedScene" uid="uid://b0dhswhg0jsg2" path="res://assets/menus/hud/hud.tscn" id="5_dian1"]
+[ext_resource type="PackedScene" uid="uid://mn13vws1dqva" path="res://assets/scripts/classes/loading_zone/loading_zone.tscn" id="6_t7uib"]
+[ext_resource type="PackedScene" uid="uid://dqiscancp1x2o" path="res://assets/areas/parallax_controller.tscn" id="7_r1luk"]
+
+[node name="city_3" type="Node2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_g1ak0")
+room_coordinates = Vector2(6, 2)
+camera = NodePath("player_obj/camera_obj")
+
+[node name="player_obj" parent="." instance=ExtResource("2_5u4j1")]
+position = Vector2(24, 212)
+
+[node name="camera_obj" type="Camera2D" parent="player_obj"]
+limit_left = 0
+limit_top = 0
+limit_right = 256
+limit_bottom = 256
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="ground_tm" parent="." instance=ExtResource("3_sprg3")]
+tile_map_data = PackedByteArray("AAACAP//AQABAAEAAAABAP//AQABAAEAAAAAAAAAAQAEAAIAAAAAAP//AQABAAEAAAD//wAAAQAAAAIAAAD/////AQAAAAEAAAAAAAQAAQADAAMAAAAAAAMAAQADAAIAAAAAAAIAAQADAAIAAAAAAAEAAQADAAIAAAD//wQAAQABAAMAAAD//wMAAQAEAAEAAAD//wIAAQAAAAIAAAD//wEAAQAAAAIAAAAAAAgAAQABAAMAAAAAAAcAAQACAAEAAAD//wgAAQACAAMAAAD//wcAAQABAAEAAAACAAAAAQACAAMAAAABAAAAAQACAAMAAAAIAAAAAQADAAIAAAAIAP//AQADAAIAAAAHAP7/AQAAAAEAAAAIAP7/AQADAAEAAAAEAAAAAQADAAMAAAAEAP//AQADAAIAAAADAAAAAQABAAMAAAADAP//AQAEAAEAAAAIAAgAAQADAAMAAAAIAAcAAQADAAIAAAAIAAYAAQADAAIAAAAIAAUAAQADAAIAAAAIAAQAAQADAAIAAAAIAAMAAQADAAIAAAAIAAIAAQADAAIAAAAIAAEAAQADAAIAAAAHAAgAAQABAAMAAAAHAAcAAQAEAAEAAAAHAAYAAQAAAAIAAAAHAAUAAQAAAAIAAAAHAAQAAQAAAAIAAAAHAAMAAQAAAAIAAAAHAAIAAQAAAAIAAAAGAAgAAQABAAMAAAAGAAcAAQABAAEAAAAFAAgAAQACAAMAAAAFAAcAAQACAAEAAAAEAAgAAQABAAMAAAAEAAcAAQABAAEAAAADAAgAAQABAAMAAAADAAcAAQABAAEAAAACAAgAAQACAAMAAAACAAcAAQACAAEAAAABAAgAAQACAAMAAAABAAcAAQABAAEAAAAHAAEAAQAAAAIAAAAHAAAAAQAAAAIAAAAHAP//AQAAAAIAAAAEAP7/AQADAAEAAAADAP7/AQAAAAEAAAD+/wQAAQAAAAMAAAD+/wMAAQAAAAEAAAD+/wgAAQAAAAMAAAD+/wcAAQAAAAEAAAA=")
+
+[node name="loading_zone" parent="." instance=ExtResource("6_t7uib")]
+position = Vector2(-16, 188)
+scale = Vector2(1, 3)
+zone_id = 1
+target_id = 1
+target_room = "res://assets/areas/city/map/rooms/city_4.tscn"
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("7_r1luk")]
+
+[node name="hud_obj" parent="." instance=ExtResource("5_dian1")]
+metadata/_edit_use_anchors_ = true
+
+[node name="loading_zone2" parent="." instance=ExtResource("6_t7uib")]
+position = Vector2(192, -16)
+scale = Vector2(3, 1)
+transition_direction = 1
+target_id = 3
+target_room = "res://assets/areas/city/map/rooms/city_2.tscn"
+
+[node name="loading_zone3" parent="." instance=ExtResource("6_t7uib")]
+position = Vector2(128, 996)
+scale = Vector2(3, 1)
+zone_id = 2
+transition_direction = 1
+target_room = "res://game/areas/city_4.tscn"
