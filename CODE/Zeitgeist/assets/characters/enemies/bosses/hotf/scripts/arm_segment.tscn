@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlcbokeqjausj"]
+
+[ext_resource type="Texture2D" uid="uid://cjjdg7mrmo6sc" path="res://assets/characters/enemies/bosses/hotf/sprites/segment.png" id="1_0w11m"]
+[ext_resource type="Script" path="res://assets/characters/enemies/bosses/hotf/scripts/arm_segment.gd" id="1_ictjq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywo77"]
+size = Vector2(24, 24)
+
+[node name="arm_segment" type="Node2D"]
+script = ExtResource("1_ictjq")
+
+[node name="arm_segment_area" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="arm_segment_area"]
+texture = ExtResource("1_0w11m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="arm_segment_area"]
+shape = SubResource("RectangleShape2D_ywo77")

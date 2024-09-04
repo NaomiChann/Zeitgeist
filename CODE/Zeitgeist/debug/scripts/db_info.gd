@@ -5,6 +5,9 @@ extends Node2D
 @onready var label : Label = get_child( 0 )
 
 func _draw():
+	UpdateDebugDisplay()
+
+func UpdateDebugDisplay():
 	if !Engine.is_editor_hint():
 		return
 	
