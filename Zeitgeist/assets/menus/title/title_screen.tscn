@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://pf8awnkeshh5"]
+
+[ext_resource type="Script" path="res://assets/menus/title/title.gd" id="1_axlc3"]
+[ext_resource type="Texture2D" uid="uid://de2epfselghg7" path="res://assets/menus/title/title.png" id="2_1hpcx"]
+[ext_resource type="FontFile" uid="uid://bp3a33y2lkkgl" path="res://assets/menus/dialogue/fonts/IRIS Font.ttf" id="3_0vska"]
+
+[node name="title_screen" type="Control" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_axlc3")
+target_room = "res://assets/menus/title/credits_screen.tscn"
+label = NodePath("Label3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0784314, 0.145098, 1)
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(120, 52)
+texture = ExtResource("2_1hpcx")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 25.0
+offset_right = -2.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_0vska")
+theme_override_font_sizes/font_size = 8
+text = "Demo"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -23.0
+offset_right = 49.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_0vska")
+theme_override_font_sizes/font_size = 8
+text = "Press SPACE"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
