@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq0yjlyjs8jmf"]
-
-[ext_resource type="AudioStream" uid="uid://biwb0mfg43n6u" path="res://assets/areas/city/bgm_cyber_lights.ogg" id="1_d0m5i"]
-
-[node name="bgm_player" type="AudioStreamPlayer"]
-stream = ExtResource("1_d0m5i")
-volume_db = -15.0
-parameters/looping = true

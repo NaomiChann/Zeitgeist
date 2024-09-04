@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://b5f0ium1nepq7"]
+
+[ext_resource type="Script" path="res://assets/objects/pickup/pickup.gd" id="1_wnry4"]
+[ext_resource type="Texture2D" uid="uid://b2oym1m8p6vh0" path="res://assets/objects/sprites/pickups.png" id="2_5pt7b"]
+[ext_resource type="Texture2D" uid="uid://cb361ij38bkw" path="res://assets/objects/sprites/hp_pickup.png" id="2_y8k0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hx3cm"]
+size = Vector2(8, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kir0d"]
+atlas = ExtResource("2_y8k0u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiav1"]
+atlas = ExtResource("2_y8k0u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdqio"]
+atlas = ExtResource("2_y8k0u")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mt3o"]
+atlas = ExtResource("2_y8k0u")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovik2"]
+atlas = ExtResource("2_5pt7b")
+region = Rect2(0, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5rm6"]
+atlas = ExtResource("2_5pt7b")
+region = Rect2(0, 20, 17, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0dth"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kir0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiav1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdqio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mt3o")
+}],
+"loop": true,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovik2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5rm6")
+}],
+"loop": true,
+"name": &"upgrade",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbxa0"]
+size = Vector2(16, 18)
+
+[node name="pickup_obj" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["Pickup"]]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_wnry4")
+pickup_value = 1
+sprite = NodePath("pickup_hurtbox/pickup_sprite")
+
+[node name="pickup_col" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_hx3cm")
+
+[node name="pickup_hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="pickup_sprite" type="AnimatedSprite2D" parent="pickup_hurtbox"]
+position = Vector2(-8, -10)
+sprite_frames = SubResource("SpriteFrames_h0dth")
+animation = &"heal"
+frame_progress = 0.943967
+centered = false
+
+[node name="pickup_col" type="CollisionShape2D" parent="pickup_hurtbox"]
+shape = SubResource("RectangleShape2D_rbxa0")
+
+[connection signal="area_entered" from="pickup_hurtbox" to="." method="_on_pickup_hurtbox_area_entered"]

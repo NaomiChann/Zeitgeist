@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=4 uid="uid://chhnea5clu6uj"]
+
+[ext_resource type="Script" path="res://assets/scripts/classes/room/room.gd" id="1_hhxno"]
+[ext_resource type="PackedScene" uid="uid://bmn753py6bcy3" path="res://assets/characters/player/player.tscn" id="2_ejd5s"]
+[ext_resource type="PackedScene" uid="uid://d2b43fyle65wx" path="res://assets/areas/tml_ground.tscn" id="3_b6uw2"]
+[ext_resource type="PackedScene" uid="uid://b0dhswhg0jsg2" path="res://assets/menus/hud/hud.tscn" id="5_jaih7"]
+[ext_resource type="PackedScene" uid="uid://mn13vws1dqva" path="res://assets/scripts/classes/loading_zone/loading_zone.tscn" id="6_8h38k"]
+[ext_resource type="PackedScene" uid="uid://dqiscancp1x2o" path="res://assets/areas/parallax_controller.tscn" id="7_gkicy"]
+[ext_resource type="PackedScene" uid="uid://b3kiouatt8ufh" path="res://assets/characters/enemies/forest/cybush/cybush.tscn" id="8_xr2t3"]
+[ext_resource type="PackedScene" uid="uid://d0hej52n2ivja" path="res://assets/characters/enemies/city/gardner/gardner.tscn" id="10_uiw2r"]
+[ext_resource type="PackedScene" uid="uid://b5f0ium1nepq7" path="res://assets/objects/pickup/pickup.tscn" id="10_x6g43"]
+
+[node name="city_2" type="Node2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_hhxno")
+room_coordinates = Vector2(5, 0)
+room_size = Vector2(2, 2)
+camera = NodePath("player_obj/camera_obj")
+
+[node name="player_obj" parent="." instance=ExtResource("2_ejd5s")]
+position = Vector2(400, 304)
+
+[node name="camera_obj" type="Camera2D" parent="player_obj"]
+limit_left = 0
+limit_top = 0
+limit_right = 512
+limit_bottom = 512
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="ground_tm" parent="." instance=ExtResource("3_b6uw2")]
+tile_map_data = PackedByteArray("AAD//w0AAQAAAAIAAAAAAA0AAQADAAIAAAAAAAwAAQADAAIAAAD//wwAAQAAAAIAAAAAAA8AAQAEAAMAAAAAAA4AAQADAAIAAAD//w8AAQAAAAIAAAD//w4AAQAAAAIAAAAOAP//AQACAAMAAAANAP//AQACAAMAAAAMAP//AQABAAMAAAALAP//AQAEAAIAAAAKAP//AQAEAAAAAAAJAP//AQACAAMAAAAIAP//AQACAAMAAAAHAP//AQACAAMAAAAGAP//AQACAAMAAAAFAP//AQABAAMAAAAEAP//AQABAAMAAAADAP//AQABAAMAAAACAP//AQABAAMAAAABAP//AQABAAMAAAAAAAAAAQADAAIAAAAAAP//AQAEAAIAAAD//wAAAQAAAAIAAAD/////AQAAAAIAAAAAAAkAAQADAAIAAAAAAAgAAQADAAIAAAAAAAcAAQADAAIAAAAAAAYAAQADAAIAAAAAAAUAAQADAAEAAAAAAAIAAQADAAMAAAAAAAEAAQADAAIAAAD//wkAAQAAAAIAAAD//wgAAQAAAAIAAAD//wcAAQAAAAIAAAD//wYAAQAEAAAAAAD//wUAAQABAAEAAAD//wIAAQABAAMAAAD//wEAAQAEAAEAAAAJABAAAQABAAMAAAAIABAAAQACAAMAAAAAABAAAQAEAAAAAAD//xAAAQAAAAMAAAAMABAAAQADAAIAAAARAP//AQADAAIAAAAQAP//AQABAAIAAAAPAP//AQAEAAAAAAAPABAAAQAAAAIAAAAPAA8AAQAAAAIAAAALABAAAQAEAAAAAAARAP7/AQADAAEAAAAQAP7/AQACAAEAAAAPAP7/AQACAAEAAAAOAP7/AQABAAEAAAANAP7/AQACAAEAAAAMAP7/AQACAAEAAAALAP7/AQACAAEAAAAKAP7/AQACAAEAAAAJAP7/AQABAAEAAAAIAP7/AQACAAEAAAAHAP7/AQABAAEAAAAGAP7/AQACAAEAAAAFAP7/AQACAAEAAAAEAP7/AQACAAEAAAADAP7/AQABAAEAAAACAP7/AQACAAEAAAABAP7/AQACAAEAAAAAAP7/AQABAAEAAAD///7/AQAAAAEAAAAQAAMAAQABAAEAAAAPAAMAAQACAAEAAAAQAAQAAQAEAAIAAAAPAAQAAQAEAAAAAAAKABAAAQABAAMAAAAFABAAAQAEAAIAAAAFAA8AAQACAAEAAAAEABAAAQAAAAIAAAAEAA8AAQAAAAEAAAABABAAAQADAAIAAAABAA8AAQADAAEAAAAQABAAAQADAAIAAAAQAA8AAQADAAIAAAAQAA4AAQADAAIAAAAQAA0AAQADAAIAAAAQAAwAAQADAAIAAAAQAAsAAQADAAIAAAAQAAoAAQADAAIAAAAQAAkAAQADAAIAAAAQAAgAAQADAAIAAAAQAAcAAQADAAIAAAAQAAYAAQADAAIAAAAQAAUAAQADAAIAAAAPAA4AAQAAAAIAAAAPAA0AAQAAAAIAAAAPAAwAAQAAAAIAAAAPAAsAAQAAAAIAAAAPAAoAAQAAAAIAAAAPAAkAAQAAAAIAAAAPAAgAAQAAAAIAAAAPAAcAAQAAAAIAAAAPAAYAAQAAAAIAAAAPAAUAAQAAAAIAAAAGAAUAAQADAAEAAAAGAAYAAQADAAIAAAAGAAcAAQADAAIAAAAGAAgAAQADAAIAAAAGAAkAAQADAAIAAAAGAAoAAQAEAAMAAAAGAAsAAQABAAMAAAAIAAAAAQADAAIAAAAIAAEAAQADAAIAAAAIAAIAAQADAAIAAAAIAAMAAQADAAMAAAAIAA8AAQACAAEAAAAJAA8AAQABAAEAAAAKAA8AAQAEAAEAAAALAA8AAQABAAIAAAAFAAUAAQAAAAEAAAAFAAYAAQAAAAIAAAAFAAcAAQAAAAIAAAAFAAgAAQAEAAEAAAAFAAkAAQABAAIAAAAFAAoAAQABAAIAAAAFAAsAAQACAAMAAAAHAAAAAQAAAAIAAAAHAAEAAQAAAAIAAAAHAAIAAQAAAAIAAAAHAAMAAQAAAAMAAAALAAMAAQAAAAEAAAALAAQAAQAAAAMAAAAOAAQAAQABAAMAAAAOAAMAAQABAAEAAAANAAQAAQABAAMAAAANAAMAAQABAAEAAAAMAAQAAQABAAMAAAAMAAMAAQABAAEAAAAQAAAAAQABAAMAAAAPAAAAAQAAAAMAAAAMAA8AAQADAAIAAAAIAAsAAQABAAMAAAAHAAsAAQABAAMAAAAIAAoAAQACAAEAAAAHAAoAAQABAAEAAAALAA4AAQABAAEAAAAKAA4AAQAAAAEAAAALAA0AAQAAAAMAAAALAAwAAQAAAAIAAAALAAsAAQAEAAAAAAALAAoAAQACAAEAAAAKAAsAAQABAAMAAAAKAAoAAQACAAEAAAAJAAsAAQABAAMAAAAJAAoAAQABAAEAAAAMAA0AAQADAAMAAAAMAAwAAQADAAIAAAAMAAsAAQADAAIAAAAMAAoAAQADAAEAAAAMAA4AAQADAAEAAAARAAQAAQADAAMAAAARAAMAAQADAAEAAAARAAAAAQADAAMAAAAEAAsAAQACAAMAAAADAAsAAQABAAMAAAAEAAoAAQAEAAEAAAADAAoAAQABAAEAAAAAAAsAAQAEAAIAAAAAAAoAAQAEAAMAAAD//wsAAQAAAAIAAAD//woAAQAAAAIAAAD+/wYAAQAAAAMAAAD+/wUAAQAAAAEAAAD+/wIAAQAAAAMAAAD+/wEAAQAAAAEAAAACAAsAAQABAAMAAAACAAoAAQABAAEAAAABAAsAAQACAAMAAAABAAoAAQABAAEAAAAEAAkAAQAAAAIAAAAEAAgAAQAAAAEAAAAHABAAAQACAAMAAAAHAA8AAQABAAEAAAAGABAAAQACAAMAAAAGAA8AAQABAAEAAAAQABEAAQADAAMAAAAPABEAAQAAAAMAAAAMABEAAQADAAMAAAALABEAAQAAAAMAAAABABEAAQADAAMAAAAAABEAAQAAAAMAAAAFABEAAQADAAMAAAAEABEAAQAAAAMAAAA=")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("7_gkicy")]
+
+[node name="hud_obj" parent="." instance=ExtResource("5_jaih7")]
+metadata/_edit_use_anchors_ = true
+
+[node name="loading_zone" parent="." instance=ExtResource("6_8h38k")]
+position = Vector2(-16, 124)
+scale = Vector2(1, 3)
+target_room = "res://assets/areas/city/map/rooms/city_1.tscn"
+
+[node name="loading_zone2" parent="." instance=ExtResource("6_8h38k")]
+position = Vector2(528, 60)
+scale = Vector2(1, 3)
+zone_id = 1
+target_room = "res://assets/areas/lab/map/rooms/lab_1.tscn"
+
+[node name="loading_zone3" parent="." instance=ExtResource("6_8h38k")]
+position = Vector2(96, 528)
+scale = Vector2(3, 1)
+zone_id = 2
+transition_direction = 1
+target_room = "res://assets/areas/city/map/rooms/city_4.tscn"
+
+[node name="loading_zone4" parent="." instance=ExtResource("6_8h38k")]
+position = Vector2(448, 528)
+scale = Vector2(3, 1)
+zone_id = 3
+transition_direction = 1
+target_room = "res://assets/areas/city/map/rooms/city_3.tscn"
+
+[node name="pickup_obj" parent="." instance=ExtResource("10_x6g43")]
+position = Vector2(308, 480)
+pickup_type = 2
+pickup_value = 2
+
+[node name="enemy_cybush4" parent="." instance=ExtResource("8_xr2t3")]
+position = Vector2(320, 320)
+
+[node name="gardner" parent="." instance=ExtResource("10_uiw2r")]
+position = Vector2(336, 216)
+
+[node name="gardner2" parent="." instance=ExtResource("10_uiw2r")]
+position = Vector2(144, 76)

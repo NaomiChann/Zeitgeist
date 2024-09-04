@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjsec1bq4c16"]
-
-[ext_resource type="Script" path="res://assets/menus/hud/health/health_bar.gd" id="1_05wqt"]
-
-[node name="health_bar" type="Node2D"]
-script = ExtResource("1_05wqt")
-cell_scene = "res://assets/menus/hud/health/health_cell.tscn"

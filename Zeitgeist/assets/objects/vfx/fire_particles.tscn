@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://b286puyuqgebv"]
+
+[ext_resource type="Texture2D" uid="uid://bgo137jtvt1hh" path="res://assets/objects/vfx/particles/circle_particle.png" id="1_44xbp"]
+[ext_resource type="Shader" path="res://assets/scripts/shaders/outline.gdshader" id="2_70x70"]
+
+[sub_resource type="Curve" id="Curve_3uuhh"]
+max_value = 1.5
+_data = [Vector2(0, 0.855533), 0.0, 11.2489, 0, 0, Vector2(0.078125, 1.14847), -1.08162, -1.08162, 0, 0, Vector2(0.147569, 0.992238), 0.109325, 0.109325, 0, 0, Vector2(1, 0.260377), -1.98312, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_jhgn2"]
+offsets = PackedFloat32Array(0, 0.828283)
+colors = PackedColorArray(0.988235, 0.6, 0.992157, 1, 0.690355, 0.0638146, 0.992157, 1)
+
+[sub_resource type="Gradient" id="Gradient_vvqo0"]
+offsets = PackedFloat32Array(0.606061, 1)
+colors = PackedColorArray(0.988235, 0.6, 0.992157, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ij445"]
+shader = ExtResource("2_70x70")
+shader_parameter/color = Color(0.258438, 0.000289843, 0.755548, 1)
+shader_parameter/width = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6s4fx"]
+viewport_path = NodePath("viewport_texture")
+
+[node name="fire_effect" type="Node2D"]
+
+[node name="viewport_texture" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(24, 48)
+
+[node name="fire_particles" type="CPUParticles2D" parent="viewport_texture"]
+texture_filter = 1
+position = Vector2(12, 32)
+amount = 15
+lifetime = 0.25
+speed_scale = 0.4
+randomness = 0.25
+lifetime_randomness = 0.5
+texture = ExtResource("1_44xbp")
+emission_shape = 2
+emission_sphere_radius = 4.0
+direction = Vector2(0, 25)
+gravity = Vector2(0, -1000)
+initial_velocity_max = 25.0
+linear_accel_min = -100.0
+damping_min = 25.0
+damping_max = 100.0
+scale_amount_curve = SubResource("Curve_3uuhh")
+color_ramp = SubResource("Gradient_jhgn2")
+color_initial_ramp = SubResource("Gradient_vvqo0")
+
+[node name="shadered_fire_particles" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ij445")
+position = Vector2(119, 78)
+texture = SubResource("ViewportTexture_6s4fx")
